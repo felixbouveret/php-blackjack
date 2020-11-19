@@ -5,5 +5,12 @@ use src\classes\Cards;
 // REQUIRES
 require_once 'vendor/autoload.php';
 
-$test = new Cards;
-$test->coucou();
+$cards = new Cards;
+$cards->shuffle();
+$cards->pick()->printName();
+$cards->pick()->printName();
+$cards->pick()->printName();
+$cards->pick()->printName();
+$cards->pick()->printName();
+$cards->pick()->printName();
+$cards->printTrash();
