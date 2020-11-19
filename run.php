@@ -1,6 +1,9 @@
 <?php
 
-use core\Browser;
+use src\classes\Cards;
 
 // REQUIRES
 require_once 'vendor/autoload.php';
+
+$test = new Cards;
+$test->coucou();

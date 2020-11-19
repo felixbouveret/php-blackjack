@@ -1,7 +1,7 @@
 {
     "name": "felix/php-blackjack",
     "autoload": {
-        "psr-4": {"core\\": "core/"}
+        "psr-4": {"src\\": "src/"}
     },
     "authors": [
         {
