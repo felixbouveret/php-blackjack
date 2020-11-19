@@ -36,4 +36,11 @@ class Console
         echo "Vous devez repondre avec les paramètre entre parenthèse ! $parenthesis " . self::BREAK_LINE;
         return $this->ask($message, $responses);
     }
+
+    public function askFree(string $message): string
+    {
+        echo $message . self::BREAK_LINE;
+        $userResponse = htmlentities(trim(fgets($this->handler)));
+        return $userResponse;
+    }
 }
