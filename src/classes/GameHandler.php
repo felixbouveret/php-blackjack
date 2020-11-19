@@ -19,7 +19,7 @@ class GameHandler {
     $this->handler = fopen("php://stdin", "r");
     $this->deck = new Deck;
     $this->console = new Console;
-    $this->bank = new Bank;
+    $this->bank = new Bank($this->deck);
 
     $this->gameSetup(false);
   }
@@ -35,11 +35,43 @@ class GameHandler {
 
   private function createPlayers() {
     for ($i = 1; $i <= $this->playerNumber; $i++) {
-      echo "Nom du joueur " . $i . " : ";
-      $clientName = fgets($this->handler);
+      $clientName = $this->console->askFree("Nom du joueur " . $i . " : ");
 
-      array_push($this->playersList, new Player($clientName, 500));
+      array_push($this->playersList, new Player($clientName, 500, $this->deck));
     }
 
+    $this->firstTurn();
+  }
+
+  private function firstTurn() {
+    foreach ($this->playersList as $player) {
+      $player->draw();
+      $player->draw();
+      var_dump($player->getHand());
+    }
+
+    $this->bank->draw();
+    $this->bank->draw();
+
+    $this->regularTurn();
+  }
+
+  private function gambleTime() {
+    foreach ($this->playersList as $player) {
+      $clientBet = $this->console->askFree("Quelle est ta mise " . $player->getName() . "?");
+      $player->addGamble($clientBet);
+    }
+  }
+
+  private function regularTurn() {
+    foreach ($this->playersList as $player) {
+      echo "Joueur : " . $player->getName() . "\n\r";
+      $clientChoice = $this->console->ask("Piocher une autre carte ?", ["O","N"]);
+      
+      while ($clientChoice === 'O') {
+        $player->draw();
+        $clientChoice = $this->console->ask("Piocher une autre carte ?", ["O","N"]);
+      }
+    }
   }
 }

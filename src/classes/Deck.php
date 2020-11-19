@@ -9,6 +9,7 @@ class Deck
     function __construct()
     {
         $this->build();
+        $this->shuffle();
     }
 
     const TYPES_OF_CARDS = [

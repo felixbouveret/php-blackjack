@@ -4,14 +4,14 @@ namespace src\classes;
 use src\classes\Player;
 
 class Bank extends Player {
-  function __construct() {
-    
+  function __construct($deck) {
+    $this->deck= $deck;
   } 
 
-  public function draw($card) {
+  public function draw() {
     $handLength = count($this->hand);
     $newCard = [
-      "card" => $card,
+      "card" => $this->deck->pick(),
       "isVisible" => true
     ];
     
