@@ -1,0 +1,17 @@
+{
+    "name": "felix/php-blackjack",
+    "autoload": {
+        "psr-4": {"core\\": "core/"}
+    },
+    "authors": [
+        {
+            "name": "Félix Bouveret",
+            "email": "bouveret.felix@gmail.com"
+        },
+        {
+            "name": "Benoit Lamonica",
+            "email": "benoit.lamonica@gmail.com"
+        }
+    ],
+    "require": {}
+}
