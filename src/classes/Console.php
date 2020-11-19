@@ -49,7 +49,7 @@ class Console
         return $userResponse;
     }
 
-    public function showCards(array $cards): string
+    public function showCards(array $cards)
     {
         $rtr = "";
 
@@ -66,6 +66,6 @@ class Console
             $rtr .= " | ";
         }
 
-        return $rtr;
+        echo $rtr . self::BREAK_LINE;
     }
 }
