@@ -4,7 +4,7 @@ namespace src\classes;
 
 use src\classes\Card;
 
-class Cards
+class Deck
 {
     function __construct()
     {
