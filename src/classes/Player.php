@@ -7,7 +7,12 @@ class Player implements Entity {
   protected $hand = [];
   private $money;
   private $gamble;
+  private $playerName;
 
+  function __construct($name, $money) {
+    $this->playerName = $name;
+    $this->money= $money;
+  }
 
   public function draw($card) {
     array_push($this->hand, $card);
@@ -55,5 +60,9 @@ class Player implements Entity {
 
   public function getMoney() {
     return $this->money;
+  }
+
+  public function getName() {
+    return $this->playerName;
   }
 }

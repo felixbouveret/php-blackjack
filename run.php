@@ -1,10 +1,11 @@
 <?php
 
-use src\classes\Deck;
-use src\classes\Console;
+use src\classes\GameHandler;
 
 // REQUIRES
 require_once 'vendor/autoload.php';
+require_once 'params.php';
 
-$consoleHandler = new Console;
-echo 'Tu veux ' . $consoleHandler->ask('Combien denfant tu veux ?', [1, 2, 3, 4]) . ' enfant(s)';
+// echo 'Tu veux ' . $consoleHandler->ask('Combien denfant tu veux ?', [1, 2, 3, 4]) . ' enfant(s)';
+
+$gameHandler = new GameHandler();
