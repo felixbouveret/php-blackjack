@@ -25,6 +25,7 @@ class GameHandler {
   }
 
   private function gameSetup() {
+    $this->console->clear();
     $clientNumber = $this->console->ask('Combien de joueurs y a-t-il ?', [1, 2, 3, 4, 5]);
     
     echo 'Il y a ' . $clientNumber . ' joueur(s)';
@@ -34,7 +35,9 @@ class GameHandler {
   }
 
   private function createPlayers() {
+    $this->console->clear();
     for ($i = 1; $i <= $this->playerNumber; $i++) {
+      $this->console->clear();
       $clientName = $this->console->askFree("Nom du joueur " . $i . " : ");
 
       array_push($this->playersList, new Player($clientName, 500, $this->deck));
@@ -44,10 +47,10 @@ class GameHandler {
   }
 
   private function firstTurn() {
+    $this->console->clear();
     foreach ($this->playersList as $player) {
       $player->draw();
       $player->draw();
-      var_dump($player->getHand());
     }
 
     $this->bank->draw();
@@ -63,14 +66,20 @@ class GameHandler {
     }
   }
 
+  private function showInfos($playerObject) {
+    $this->console->clear();
+    echo "Joueur : " . $playerObject->getName() . "\n\r";
+    $this->console->showCards($playerObject->getHand());
+    return $this->console->ask("Piocher une autre carte ?", ["O","N"]);
+  }
+
   private function regularTurn() {
     foreach ($this->playersList as $player) {
-      echo "Joueur : " . $player->getName() . "\n\r";
-      $clientChoice = $this->console->ask("Piocher une autre carte ?", ["O","N"]);
+      $clientChoice = $this->showInfos($player);
       
       while ($clientChoice === 'O') {
         $player->draw();
-        $clientChoice = $this->console->ask("Piocher une autre carte ?", ["O","N"]);
+        $clientChoice = $this->showInfos($player);
       }
     }
   }

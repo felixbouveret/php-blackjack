@@ -13,6 +13,11 @@ class Console
         $this->handler = fopen("php://stdin", "r");
     }
 
+    public function clear()
+    {
+        strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' ? system('cls') : system('clear');
+    }
+
     public function ask(string $message, array $responses): string
     {
         $parenthesis = '(';
@@ -42,5 +47,25 @@ class Console
         echo $message . self::BREAK_LINE;
         $userResponse = htmlentities(trim(fgets($this->handler)));
         return $userResponse;
+    }
+
+    public function showCards(array $cards)
+    {
+        $rtr = "";
+
+        $arrayTypeSign = [
+            "Coeur" => "♥️",
+            "Carreaux" => "♦️",
+            "Pique" => "♠️",
+            "Trèffle" => "♣️"
+        ];
+
+        foreach ($cards as $card) {
+            $sign = $arrayTypeSign[$card->getType()];
+            $rtr .= $card->getName() . " " . $sign;
+            $rtr .= " | ";
+        }
+
+        echo $rtr . self::BREAK_LINE;
     }
 }
