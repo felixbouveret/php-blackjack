@@ -18,4 +18,12 @@ class Entity implements EntityInterface {
   public function getHand() {
     return $this->hand;
   }
+
+  public function getScore() {
+    $score = 0;
+    foreach ($this->hand as $card) {
+      $score += $card->getValue();
+    }
+    return $score;
+  }
 }

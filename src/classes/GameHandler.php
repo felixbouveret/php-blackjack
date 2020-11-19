@@ -60,6 +60,7 @@ class GameHandler {
 
   private function gambleTime() {
     foreach ($this->playersList as $player) {
+      $this->console->clear();
       $clientBet = $this->console->askBet("Tu as " . $player->getMoney() . "$ ! Quelle est ta mise " . $player->getName() . " ?");
       while(!$player->addGamble($clientBet)) {
         echo "Vous n'avez pas assez d'argent ! \n\r";
@@ -86,6 +87,24 @@ class GameHandler {
         $player->draw();
         $clientChoice = $this->showInfos($player);
       }
+    }
+
+    $this->endTurn();
+  }
+
+  private function endTurn() {
+    $this->bank->draw();
+    $this->console->clear();
+    echo "Banque : ";
+    $this->console->showCards($this->bank->getHand());
+    echo "Score : " . $this->bank->getScore() . "\n\r";
+    $this->console->separator();
+
+    foreach ($this->playersList as $player) {
+      echo "Joueur : " . $player->getName() . "\n\r";
+      $this->console->showCards($player->getHand());
+      echo "Score : " . $player->getScore() . "\n\r";
+      $this->console->separator();
     }
   }
 }
