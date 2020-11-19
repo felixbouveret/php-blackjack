@@ -55,14 +55,18 @@ class GameHandler {
 
     $this->bank->draw();
 
-    $this->regularTurn();
+    $this->gambleTime();
   }
 
   private function gambleTime() {
     foreach ($this->playersList as $player) {
-      $clientBet = $this->console->askFree("Quelle est ta mise " . $player->getName() . "?");
-      $player->addGamble($clientBet);
+      $clientBet = $this->console->askBet("Tu as " . $player->getMoney() . "$ ! Quelle est ta mise " . $player->getName() . " ?");
+      while(!$player->addGamble($clientBet)) {
+        echo "Vous n'avez pas assez d'argent ! \n\r";
+        $clientBet = $this->console->askBet("Tu as " . $player->getMoney() . "$ ! Quelle est ta mise " . $player->getName() . " ?");
+      }
     }
+    $this->regularTurn();
   }
 
   private function showInfos($playerObject) {
@@ -75,7 +79,6 @@ class GameHandler {
   }
 
   private function regularTurn() {
-  
     foreach ($this->playersList as $player) {
       $clientChoice = $this->showInfos($player);
       

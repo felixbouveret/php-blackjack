@@ -13,13 +13,15 @@ class Player extends Entity {
     $this->money= $money;
     $this->deck= $deck;
   }
-  
+
   public function addGamble($amount) {
-    if($this->money < $amount) {
-      return "Vous n'avez pas assez d'argent !";
+    if($amount > $this->money) {
+      return false;
     }
     $this->money -= $amount;
     $this->gamble = $amount;
+
+    return true;
   }
   
   public function getGamble() {
