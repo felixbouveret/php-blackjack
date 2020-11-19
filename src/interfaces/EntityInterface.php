@@ -2,8 +2,7 @@
 
 namespace src\interfaces;
 
-interface Entity {
+interface EntityInterface {
   public function draw();
-  public function skip();
   public function getHand();
 }

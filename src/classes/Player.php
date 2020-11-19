@@ -1,33 +1,19 @@
 <?php
 namespace src\classes;
 
-use src\interfaces\Entity;
+use src\classes\Entity;
 
-class Player implements Entity {
-  protected $hand = [];
+class Player extends Entity {
   private $money;
   private $gamble;
   private $playerName;
-  private $deck;
 
   function __construct($name, $money, $deck) {
     $this->playerName = $name;
     $this->money= $money;
     $this->deck= $deck;
   }
-
-  public function draw() {
-    array_push($this->hand, $this->deck->pick());
-  }
   
-  public function skip() {
-    echo('skip');
-  }
-  
-  public function getHand() {
-    return $this->hand;
-  }
-
   public function addGamble($amount) {
     if($this->money < $amount) {
       return "Vous n'avez pas assez d'argent !";
