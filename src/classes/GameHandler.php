@@ -54,7 +54,6 @@ class GameHandler {
     }
 
     $this->bank->draw();
-    $this->bank->draw();
 
     $this->regularTurn();
   }
@@ -68,12 +67,15 @@ class GameHandler {
 
   private function showInfos($playerObject) {
     $this->console->clear();
+    echo "Banque : ";
+    $this->console->showCards($this->bank->getHand());
     echo "Joueur : " . $playerObject->getName() . "\n\r";
     $this->console->showCards($playerObject->getHand());
     return $this->console->ask("Piocher une autre carte ?", ["O","N"]);
   }
 
   private function regularTurn() {
+  
     foreach ($this->playersList as $player) {
       $clientChoice = $this->showInfos($player);
       
