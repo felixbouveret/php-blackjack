@@ -49,6 +49,19 @@ class Console
         return $userResponse;
     }
 
+    public function askBet(string $message): int
+    {
+        echo $message . self::BREAK_LINE;
+        $userResponse = trim(fgets($this->handler));
+        if (is_numeric($userResponse)) {
+            $userResponse = intval($userResponse);
+            return $userResponse;
+        }
+
+        echo "La valeur donnée doit être numérique !";
+        return $this->askBet($message);
+    }
+
     public function showCards(array $cards)
     {
         $rtr = "";
