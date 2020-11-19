@@ -18,6 +18,11 @@ class Console
         strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' ? system('cls') : system('clear');
     }
 
+    public function separator()
+    {
+        echo self::BREAK_LINE . "--------------------------------------" . self::BREAK_LINE;
+    }
+
     public function ask(string $message, array $responses): string
     {
         $parenthesis = '(';
